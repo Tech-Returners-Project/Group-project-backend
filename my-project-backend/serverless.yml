@@ -1,36 +1,16 @@
 
-
 service: my-project-backend
-
 provider:
   name: aws
   region: eu-west-1
   runtime: nodejs12.x
 
-
-
 functions:
-  app:
+  activities:
     handler: handler.app
-    environment: 
-      DB_HOST: ${opt:DB_HOST}
-      DB_USER: ${opt:DB_USER}
-      DB_PASSWORD: ${opt:DB_PASSWORD}
     events:
       - http:
           method: get
-          path: Activities
+          path: activities
           cors: true
-      - http:
-          method: put
-          path: Activities/{id}
-          cors: true
-      - http:
-          method: post
-          path: Activities
-          cors: true
-      - http: 
-          method: delete
-          path: Activities/{id}
-          cors: true 
-        
+  
