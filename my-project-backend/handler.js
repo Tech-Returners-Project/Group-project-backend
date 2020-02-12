@@ -13,8 +13,8 @@ app.get("/activities", function (request, response) {
   response.status(200).json({
     activities: [
       {
-        Location: 'Manchester',
-        Place: 'outdoor'
+        Location: "Manchester",
+        Place: "outdoor"
       }
     ]
   });

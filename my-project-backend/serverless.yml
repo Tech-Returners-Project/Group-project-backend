@@ -13,4 +13,5 @@ functions:
           method: get
           path: activities
           cors: true
-  
+    
+        
