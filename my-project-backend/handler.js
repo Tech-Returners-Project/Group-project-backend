@@ -14,7 +14,8 @@ app.get("/activities", function (request, response) {
     activities: [
       {
         Location: "Manchester",
-        Place: "outdoor"
+        Place: "outdoor",
+        Price: 'cheap'
       }
     ]
   });
