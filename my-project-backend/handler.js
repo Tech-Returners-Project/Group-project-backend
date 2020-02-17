@@ -2,22 +2,35 @@ const express = require("express");
 const cors = require("cors");
 const serverlessHttp = require("serverless-http");
 const bodyParser = require("body-parser");
+const mysql = require("mysql");
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: "MakeMyDay"
+});
 
 app.get("/activities", function (request, response) {
+  connection.query("SELECT * FROM Activities", function (err, data) {
+    if (err) {
+      response.status(500).json({
+        error: err
+      });
+    } else {
+      const query = request.query;
 
-  response.status(200).json({
-    activities: [
-      {
-        Location: "Manchester",
-        Place: "outdoor",
-        Price: 'cheap'
-      }
-    ]
+//insert function here
+
+
+      response.status(200).json({
+        activities: data 
+      });
+    }
   });
 });
 
