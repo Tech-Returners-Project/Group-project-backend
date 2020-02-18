@@ -27,25 +27,35 @@ app.get("/activities", function (request, response) {
       data = data.map(activity => {
         let score = 0
 
-        if (query.Location === activity.Location) {
+        if (query.answer[0] === activity.Location) {
           score++
         }
-        if (query.Place === activity.Place) {
+        if (query.answer[1] === activity.Place) {
           score++
         }
-        if (query.People === activity.People) {
+        if (query.answer[2] === activity.People) {
           score++
         }
-        if (query.Price === activity.Price) {
+        if (query.answer[3] === activity.Price) {
           score++
         }
-        if (query.Activity_Level === activity.Activity_Level) {
+        if (query.answer[4] === activity.Activity_Level) {
           score++
         }
         activity.score = score
         return (activity)
       })
+
+      let highestScoringItem = data[0];
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].score > highestScoringItem) {
+          highestScoringItem = data[i]
+        }
+      }
     }
+    response.status(200).json({
+      highestScoringItem
+    })
   });
 });
 
