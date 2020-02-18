@@ -24,39 +24,27 @@ app.get("/activities", function (request, response) {
     } else {
       const query = request.query;
 
-      data = Activities.map(activity => {
+      data = data.map(activity => {
         let score = 0
 
-        if (query[1].Answer === activity.Location) {
+        if (query.Location === activity.Location) {
           score++
         }
-        if (query[0].Answer === activity.Place) {
+        if (query.Place === activity.Place) {
           score++
         }
-        if (query[2].Answer === activity.People) {
+        if (query.People === activity.People) {
           score++
         }
-        if (query[3].Answer === activity.Price) {
+        if (query.Price === activity.Price) {
           score++
         }
-        if (query[4].Answer === activity.Activity_Level) {
+        if (query.Activity_Level === activity.Activity_Level) {
           score++
         }
         activity.score = score
         return (activity)
       })
-
-
-      let highestScoringItem = Activities[0];
-      for (let i = 0; i < Activities.length; i++) {
-        if (Activities[i].score > highestScoringItem) {
-          highestScoringItem = Activities[i]
-        }
-      }
-
-      response.status(200).json({
-        highestScoringItem
-      });
     }
   });
 });
