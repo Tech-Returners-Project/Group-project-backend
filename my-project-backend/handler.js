@@ -25,20 +25,19 @@ app.get("/activities", function (request, response) {
       const query = request.query;
       data = data.map(activity => {
         let score = 0
-
-        if (query.Location === activity.Location) {
+        if (query.Location.toLowerCase() === activity.Location.toLowerCase()) {
           score++
         }
-        if (query.Place === activity.Place) {
+        if (query.Place.toLowerCase() === activity.Place.toLowerCase()) {
           score++
         }
-        if (query.People=== activity.People) {
+        if (query.People.toLowerCase() === activity.People.toLowerCase()) {
           score++
         }
-        if (query.Price=== activity.Price) {
+        if (query.Price.toLowerCase() === activity.Price.toLowerCase()) {
           score++
         }
-        if (query.Activity_Level=== activity.Activity_Level) {
+        if (query.Activity_Level.toLowerCase() === activity.Activity_Level.toLowerCase()) {
           score++
         }
         activity.score = score
