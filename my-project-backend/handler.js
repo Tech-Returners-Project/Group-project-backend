@@ -23,8 +23,10 @@ app.get("/activities", function (request, response) {
       });
     } else {
       const query = request.query;
+
       data = data.map(activity => {
-        let score = 0
+        let score = 0;
+
         if (query.Location.toLowerCase() === activity.Location.toLowerCase()) {
           score++
         }
@@ -47,8 +49,8 @@ app.get("/activities", function (request, response) {
       let highestScoringItem = data[0];
 
       for (let i = 0; i < data.length; i++) {
-        if (data[i].score > highestScoringItem) {
-          highestScoringItem = data[i]
+        if (data[i].score > highestScoringItem.score) {
+          highestScoringItem = data[i];
         }
       }
 
