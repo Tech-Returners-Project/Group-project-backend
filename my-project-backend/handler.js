@@ -23,23 +23,22 @@ app.get("/activities", function (request, response) {
       });
     } else {
       const query = request.query;
-
       data = data.map(activity => {
         let score = 0
 
-        if (query.answer[0] === activity.Location) {
+        if (query.Location === activity.Location) {
           score++
         }
-        if (query.answer[1] === activity.Place) {
+        if (query.Place === activity.Place) {
           score++
         }
-        if (query.answer[2] === activity.People) {
+        if (query.People=== activity.People) {
           score++
         }
-        if (query.answer[3] === activity.Price) {
+        if (query.Price=== activity.Price) {
           score++
         }
-        if (query.answer[4] === activity.Activity_Level) {
+        if (query.Activity_Level=== activity.Activity_Level) {
           score++
         }
         activity.score = score
@@ -47,15 +46,17 @@ app.get("/activities", function (request, response) {
       })
 
       let highestScoringItem = data[0];
+
       for (let i = 0; i < data.length; i++) {
         if (data[i].score > highestScoringItem) {
           highestScoringItem = data[i]
         }
       }
+
+      response.status(200).json({
+        highestScoringItem
+      })
     }
-    response.status(200).json({
-      highestScoringItem
-    })
   });
 });
 
