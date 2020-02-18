@@ -24,12 +24,39 @@ app.get("/activities", function (request, response) {
     } else {
       const query = request.query;
 
-//insert function here
+      data = data.map(activity => {
+        let score = 0;
 
+        if (query.Location.toLowerCase() === activity.Location.toLowerCase()) {
+          score++
+        }
+        if (query.Place.toLowerCase() === activity.Place.toLowerCase()) {
+          score++
+        }
+        if (query.People.toLowerCase() === activity.People.toLowerCase()) {
+          score++
+        }
+        if (query.Price.toLowerCase() === activity.Price.toLowerCase()) {
+          score++
+        }
+        if (query.Activity_Level.toLowerCase() === activity.Activity_Level.toLowerCase()) {
+          score++
+        }
+        activity.score = score
+        return (activity)
+      })
+
+      let highestScoringItem = data[0];
+
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].score > highestScoringItem.score) {
+          highestScoringItem = data[i];
+        }
+      }
 
       response.status(200).json({
-        activities: data 
-      });
+        highestScoringItem
+      })
     }
   });
 });
