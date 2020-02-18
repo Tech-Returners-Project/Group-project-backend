@@ -22,24 +22,24 @@ app.get("/activities", function (request, response) {
         error: err
       });
     } else {
-      const questions = request.query;
+      const query = request.query;
 
       data = Activities.map(activity => {
         let score = 0
 
-        if (questions[1].Answer === activity.Location) {
+        if (query[1].Answer === activity.Location) {
           score++
         }
-        if (questions[0].Answer === activity.Place) {
+        if (query[0].Answer === activity.Place) {
           score++
         }
-        if (questions[2].Answer === activity.People) {
+        if (query[2].Answer === activity.People) {
           score++
         }
-        if (questions[3].Answer === activity.Price) {
+        if (query[3].Answer === activity.Price) {
           score++
         }
-        if (questions[4].Answer === activity.Activity_Level) {
+        if (query[4].Answer === activity.Activity_Level) {
           score++
         }
         activity.score = score
