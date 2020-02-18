@@ -24,8 +24,35 @@ app.get("/activities", function (request, response) {
     } else {
       const query = request.query;
 
-//insert function here
-
+      Activities = Activities.map(activity => {
+        let score = 0
+      
+        if (questions[1].Answer === activity.Location) {
+          score++
+        }
+        if (questions[0].Answer === activity.Place) {
+          score++
+        }
+        if (questions[2].Answer === activity.People) {
+          score++
+        }
+        if (questions[3].Answer === activity.Price) {
+          score++
+        }
+        if (questions[4].Answer === activity.Activity_Level) {
+          score++
+        }
+      activity.score = score
+      return (activity)
+      })
+      
+      let highestScoringItem = Activities[0];
+      for (let i = 0; i < Activities.length; i++) {
+        if (Activities[i].score > highestScoringItem) {
+          highestScoringItem = Activities[i]
+        }
+      }
+      return highestScoringItem
 
       response.status(200).json({
         activities: data 
